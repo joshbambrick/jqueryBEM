@@ -26,7 +26,7 @@
     var whiteSpace = /[\s\uFEFF\xA0]+/;
 
     $.fn.addBEMClass = function (className) {
-        var className = $.trim(className);
+        className = $.trim(className);
 
         if (whiteSpace.test(className)) throw 'Invalid BEM class name.';
 
@@ -44,7 +44,7 @@
     };
 
     $.fn.removeBEMClass = function (classToRemove) {
-        var classToRemove = $.trim(classToRemove);
+        classToRemove = $.trim(classToRemove);
 
         if (whiteSpace.test(classToRemove)) throw 'Invalid BEM class name.';
 
@@ -59,6 +59,28 @@
                 }
 
                 $this.data({BEMClassName: null});
+            }
+        });
+    };
+
+    $.fn.hasBEMClass = function (classToTest) {
+        classToTest = $.trim(classToTest);
+
+        if (whiteSpace.test(classToTest)) throw 'Invalid BEM class name.';
+
+        return this.data('BEMClassName') === classToTest;
+    };
+
+    $.fn.toggleBEMClass = function (className) {
+        var classes = $.trim(className).split(whiteSpace);
+
+        return this.each(function () {
+            var $this = $(this), curClassIndex;
+
+            for (curClassIndex = 0; curClassIndex < classes.length; curClassIndex += 1) {
+                if (whiteSpace.test(classes[curClassIndex])) throw 'Invalid BEM class provided.';
+
+                $this[$this.hasBEMClass(classes[curClassIndex]) ? 'removeBEMClass' : 'addBEMClass'](classes[curClassIndex]);
             }
         });
     };
@@ -100,7 +122,7 @@
 
         suffix = $.trim(suffix);
 
-        if (whiteSpace.test(suffix)) throw 'Invalid BEM suffix provided.'
+        if (whiteSpace.test(suffix)) throw 'Invalid BEM suffix provided.';
 
         return (!!BEMClassName && this.hasClass(BEMClassName + '--' + suffix));
     };
@@ -113,6 +135,8 @@
 
             if (BEMClassName) {
                 for (curSuffixIndex = 0; curSuffixIndex < suffices.length; curSuffixIndex += 1) {
+                    if (whiteSpace.test(suffices[curSuffixIndex])) throw 'Invalid BEM suffix provided.';
+
                     $this[$this.hasBEMSuffix(suffices[curSuffixIndex]) ? 'removeBEMSuffix' : 'addBEMSuffix'](suffices[curSuffixIndex]);
                 }
             }
