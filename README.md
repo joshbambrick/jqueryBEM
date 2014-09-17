@@ -29,7 +29,7 @@ This method returns a boolean as to whether or not the first DOM element in the 
 Causes an error if the class passed contains white space.
     
     // returns false
-    $appendage.hasBEMClass('toe');
+    $appendage.hasBEMClass('body__toe');
 
 ### toggleBEMClass ###
 Call this method, passing a BEM class (or space-separated list of BEM classes), to be toggled on the DOM elements.
@@ -37,7 +37,7 @@ Call this method, passing a BEM class (or space-separated list of BEM classes), 
 Passing an class containing white space, or causing more than one BEM class to a DOM element, will cause an error to be thrown. The DOM elements and BEM classes will be processed in order.
     
     // now has class 'body__toe'
-    $appendage.toggleBEMClass('toe');
+    $appendage.toggleBEMClass('body__toe');
 
 ### addBEMSuffix ###
 Call this method, passing a BEM suffix (or space-separated list of BEM suffices), to be added to the DOM elements.
@@ -51,7 +51,7 @@ Calling this method on a where the DOM elements have not had BEM classes added v
 Call this method, passing a BEM suffix (or space-separated list of BEM suffices), to be removed from the DOM elements.
 
     // now has classes 'body__toe', 'body__toe--middle'
-    $appendage.removeBEMSuffix('middle');
+    $appendage.removeBEMSuffix('left-foot');
 
 ### hasBEMSuffix ###
 This method returns a boolean as to whether or not the first DOM element in the jQuery object has the suffix passed.
